@@ -1,0 +1,12 @@
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\CaseServiceMain.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\controller\CaseController.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\dto\AddCaseRequest.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\dto\CaseData.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\dto\CaseResponse.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\dto\UpdateCaseRequest.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\entity\Cases.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\enums\ErrorCode.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\repository\CaseRepository.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\service\CaseService.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\service\CaseServiceImpl.java
+C:\All_git_repo\the-mono-repo\hospital-management\case-service\src\main\java\org\dnyanyog\utility\CustomIdGenerator.java

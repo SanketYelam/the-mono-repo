@@ -3,7 +3,7 @@ name: openjdk base image build
 on:
   push:
     paths:
-     - dev-sec-ops/base-images/openjdk-24-slim
+    - dev-sec-ops/base-images/openjdk-24-slim.dockerfile
 
 jobs:
   build-openjdk-24-slim-image:

@@ -1,0 +1,59 @@
+name: CI/CD workflow
+
+on:
+  push:
+    paths: hospital-management/patient-service/**
+      
+
+jobs:
+  pre-commit-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Setup Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '21'
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name : Google formatter check 
+      working-directory: 'hospital-management/patient-service'
+      run : mvn com.spotify.fmt:fmt-maven-plugin:check
+
+    - name: License finder
+      working-directory: 'hospital-management/patient-service'
+      run: |
+          docker pull ${{vars.CONTAINER_HUB_NAME}}/license-finder:latest
+          docker run -v "$(pwd):/scan" ${{vars.CONTAINER_HUB_NAME}}/license-finder:latest 
+      continue-on-error: true
+    
+
+    - name: Check gitleaks
+      run: |
+          docker pull sanketyelam/gitleaks
+          docker run --rm -v "$(pwd)":/path sanketyelam/gitleaks:latest detect -v
+          
+    - name : OSS Scan
+      run : mvn ossindex:audit
+      continue-on-error: true
+
+    - name : OWASP Scan
+      run : mvn org.owasp:dependancy-check-maven:check
+      continue-on-error: true
+
+    - name: Create docker images
+      run: |
+        cd  hospital-management/patient-service
+        mvn clean install docker:build -Dimage.registry=${{ vars.DOCKER_HUB_NAME }} -Dimage.tag=$GITHUB_REF_NAME
+
+    - name: Log in GitHub Docker Hub  
+      uses: docker/login-action@v2
+      with:
+        username: ${{ vars.DOCKER_HUB_NAME }}
+        password: ${{ secrets.DOCKER_HUB_PAT }}
+
+    - name: Image push
+      run: docker push ${{ vars.DOCKER_HUB_NAME }}/patient-service:$GITHUB_REF_NAME

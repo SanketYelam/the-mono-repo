@@ -3,7 +3,7 @@ name: CI/CD workflow
 on:
   push:
     paths:
-      - hospital-manageemnt-mono-repo/**
+      - hospital-manageemnt/**
 
 jobs:
   pre-commit-scan:

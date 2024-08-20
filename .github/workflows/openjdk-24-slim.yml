@@ -1,30 +1,28 @@
-name : openjdk base image build
+name: openjdk base image build
 
 on:
   push:
     paths:
-     -dev-sec-ops/base-images/openjdk-24-slim
-
+     - dev-sec-ops/base-images/openjdk-24-slim
 
 jobs:
-   build-openjdk-24-slim-image
-     runs-on: ubuntu-latest
+  build-openjdk-24-slim-image:
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: code checkout
+        uses: actions/checkout@v4
 
-     steps:
-      -name: code checkout
-       uses: actions/checkout@v4
+      - name: base image build
+        run: docker build -t ${{ vars.DOCKER_HUB_NAME }}/openjdk-24-slim:latest -f dev-sec-ops/base-images/openjdk-24-slim .
 
-      -name: base image build
-       run: docker build -t ${{vares.DOCKER_HUB_NAME}}/openjdk-24-slim:latetst -f dev-sec-ops/base-images/openjdk-24-slim 
+      - name: login to docker registry
+        uses: docker/login-action@v2
+        with:
+          username: ${{ vars.DOCKER_HUB_NAME }}
+          password: ${{ secrets.DOCKER_HUB_PAT }}
 
-      -name: login docker registry
-       uses: docker/login-action@v2
-       with:
-         username: ${{vares.DOCKER_HUB_NAME}}
-         password: ${{secrets.DOCKER_HUB_PAT}}
-
-      -name: base image push
-      -run: docker push ${{vares.DOCKER_HUB_NAME}}/openjdk-24-slim:latest
+      - name: base image push
+        run: docker push ${{ vars.DOCKER_HUB_NAME }}/openjdk-24-slim:latest
 
 

@@ -9,5 +9,3 @@ public class ApiGatewayMain {
     SpringApplication.run(ApiGatewayMain.class, args);
   }
 }
-
-

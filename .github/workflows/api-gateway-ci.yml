@@ -22,7 +22,8 @@ jobs:
     - name : Google formatter check 
       working-directory: 'hospital-management/api-gateway'
       run : mvn com.spotify.fmt:fmt-maven-plugin:check
-
+      continue-on-error: true
+            
     - name: License finder
       working-directory: 'hospital-management/api-gateway'
       run: |

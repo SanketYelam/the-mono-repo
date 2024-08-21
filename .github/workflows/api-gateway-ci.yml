@@ -27,7 +27,7 @@ jobs:
       working-directory: 'hospital-management/api-gateway'
       run: |
           docker pull ${{vars.CONTAINER_HUB_NAME}}/license-finder:latest
-          docker run -v "$(pwd):/scan" ${{vars.CONTAINER_HUB_NAME}}/license-finder:latest 
+          docker run -v "$(pwd):/scan" ${{vars.DOCKER_HUB_NAME}}/license-finder:latest 
       continue-on-error: true
     
 

@@ -22,20 +22,21 @@ jobs:
     - name : Google formatter check 
       working-directory: 'hospital-management/api-gateway'
       run : mvn com.spotify.fmt:fmt-maven-plugin:check
-      continue-on-error: true
+      
             
     - name: License finder
       working-directory: 'hospital-management/api-gateway'
       run: |
           docker pull ${{vars.DOCKER_HUB_NAME}}/license-finder:latest
           docker run -v "$(pwd):/scan" ${{vars.DOCKER_HUB_NAME}}/license-finder:latest 
-      continue-on-error: true
+      
     
 
     - name: Check gitleaks
       run: |
           docker pull sanketyelam/gitleaks
           docker run --rm -v "$(pwd)":/path sanketyelam/gitleaks:latest detect -v
+      continue-on-error: true
           
     - name : OSS Scan
       run : mvn ossindex:audit

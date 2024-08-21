@@ -27,6 +27,7 @@ jobs:
     - name: License finder
       working-directory: 'hospital-management/api-gateway'
       run: |
+          mvn clean install
           docker pull ${{vars.DOCKER_HUB_NAME}}/license-finder:latest
           docker run -v "$(pwd):/scan" ${{vars.DOCKER_HUB_NAME}}/license-finder:latest 
       

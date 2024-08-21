@@ -2,7 +2,7 @@ name: CI/CD workflow
 
 on:
   push:
-    paths: hospital-management/api-gateway/**
+    paths: hospital-management/api/**
       
 
 jobs:
